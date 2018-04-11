@@ -1,4 +1,4 @@
-package androidproficiency.com.facts;
+package androidproficiency.com.facts.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,10 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidproficiency.com.facts.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import fragment.ItemInteractionCallback;
+import fragment.LinearVerticalFragment;
+import model.Item;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemInteractionCallback {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -23,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, LinearVerticalFragment.newInstance()).commit();
     }
 
     @Override
@@ -39,5 +45,19 @@ public class MainActivity extends AppCompatActivity {
                     Uri.parse("https://github.com/erikcaffrey/RecyclerView-Examples")));
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /***
+     * Set title of the toolbar
+     * @param title Title name
+     */
+    public void setToolBarTitle(String title) {
+        if(null != getSupportActionBar())
+            getSupportActionBar().setTitle(title);
+    }
+
+    @Override
+    public void onItemInteraction(Item item) {
+
     }
 }
