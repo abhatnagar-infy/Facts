@@ -2,6 +2,8 @@ package androidproficiency.com.facts.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import androidproficiency.com.facts.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import fragment.ItemDetailFragment;
 import fragment.ItemInteractionCallback;
 import fragment.LinearVerticalFragment;
 import model.Item;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements ItemInteractionCa
 
     @Override
     public void onItemInteraction(Item item) {
-
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        ItemDetailFragment itemDetailFragment = ItemDetailFragment.newInstance(item);
+        itemDetailFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
+        itemDetailFragment.show(mFragmentManager, "");
     }
 }

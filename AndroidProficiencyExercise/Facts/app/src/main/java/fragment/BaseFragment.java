@@ -2,9 +2,11 @@ package fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
+import adapter.AdapterExample;
 import androidproficiency.com.facts.R;
 import androidproficiency.com.facts.activity.MainActivity;
 import butterknife.Bind;
@@ -22,7 +25,9 @@ import model.Item;
 import model.ItemInteractor;
 import presenter.ItemPresenter;
 import presenter.RecyclerItemClickListener;
+import utils.PaginationScrollListener;
 import view.ItemView;
+import widget.ItemOffsetDecoration;
 
 /**
  * Created by Anubha on 11/04/18.
@@ -100,17 +105,37 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
     private void refreshRecyclerViewData() {
         currentPage = PAGE_START;
         isLastPage = false;
+        ((AdapterExample) adapter).clear();
         itemPresenter.onResume(currentPage);
     }
 
     @Override
     public void setItems(List<Item> itemList) {
+        adapter = getAdapter(itemList);
+        recyclerView.setAdapter(adapter);
 
+        if (adapter instanceof AdapterExample) {
+            ((AdapterExample) adapter).setRecyclerItemClickListener(this);
+
+            if (currentPage <= TOTAL_PAGES) ((AdapterExample) adapter).addLoadingFooter();
+            else isLastPage = true;
+        }
     }
 
     @Override
     public void addItems(List<Item> itemList) {
+        if (adapter instanceof AdapterExample) {
+            ((AdapterExample) adapter).removeLoadingFooter();
+            isLoading = false;
 
+            if (adapter instanceof AdapterExample) {
+                ((AdapterExample) adapter).setRecyclerItemClickListener(this);
+                ((AdapterExample) adapter).addAll(itemList);
+
+                if (currentPage != TOTAL_PAGES) ((AdapterExample) adapter).addLoadingFooter();
+                else isLastPage = true;
+            }
+        }
     }
     @Override
     public void setTitle(String title) {
@@ -133,7 +158,8 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
 
     @Override
     public void showDetails(int position) {
-
+        Item item = ((AdapterExample) recyclerView.getAdapter()).getItem(position);
+        itemInteractionCallback.onItemInteraction(item);
     }
 
     @Override
@@ -157,6 +183,40 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
             layoutManager = (LinearLayoutManager) getLayoutManager();
             recyclerView.setLayoutManager(layoutManager);
         }
+
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(recyclerView.getContext(), R.dimen.item_decoration));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.addOnScrollListener(new PaginationScrollListener(layoutManager) {
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage += 1;
+
+                // mocking network delay for API call
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        itemPresenter.loadNext(currentPage);
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public int getTotalPageCount() {
+                return TOTAL_PAGES;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
     }
 
     private void setupSwipeRefreshLayout() {

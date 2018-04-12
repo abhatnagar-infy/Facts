@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import adapter.AdapterExample;
 import androidproficiency.com.facts.R;
 import model.Item;
 
@@ -28,10 +29,9 @@ public class LinearVerticalFragment extends BaseFragment {
     }
 
     @Override
-    protected RecyclerView.Adapter getAdapter(List<Item> items) {
-        return null;
+    protected RecyclerView.Adapter getAdapter(List<Item> itemList) {
+        return new AdapterExample(getActivity(), itemList, R.layout.item_type_main);
     }
-
 
     private LinearLayoutManager getLinearLayoutManager() {
         return new LinearLayoutManager(
