@@ -1,5 +1,5 @@
 # Facts
-The app is developed to provide facts about Canada as part of the XYZ assignment to showcase technical proficiency, coding style, library awareness and approach.
+The app is developed to provide facts about Canada as part of the Android Proficiency assignment to showcase technical proficiency, coding style, library awareness and approach.
 
 # Features
 
