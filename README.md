@@ -12,6 +12,8 @@ This example is completed to showcase technical proficiency, coding-style, libra
 * Responsive design techniques
 * Pull to refresh
 
+**_JSON is seperated into two different files to mock the lazy loading of long list of data using pagination technique_ **
+
 # Libraries used on the sample project
 
 1. Butterknife - For view injection
