@@ -7,13 +7,13 @@ import model.ItemList;
 import view.ItemView;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Class that defines presenter details
  */
 
 public class ItemPresenter implements Presenter<ItemView>, DataLoaderListener {
 
     private ItemView itemView;
-    private ItemInteractor itemInteractor;
+    private final ItemInteractor itemInteractor;
 
     public ItemPresenter(ItemInteractor itemInteractor) {
         this.itemInteractor = itemInteractor;

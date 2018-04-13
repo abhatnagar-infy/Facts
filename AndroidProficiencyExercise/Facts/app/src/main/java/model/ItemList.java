@@ -4,11 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Model class that holds item list
+ */
 public class ItemList {
     @SerializedName("title")
-    private String title;
+    private final String title;
     @SerializedName("rows")
-    private ArrayList<Item> itemList;
+    private final ArrayList<Item> itemList;
 
     public ItemList(String title, ArrayList<Item> itemList) {
         this.title = title;

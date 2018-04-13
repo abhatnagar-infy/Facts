@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Model class that holds item data
+ */
 public class Item implements Serializable {
     @SerializedName("title")
     private String title;

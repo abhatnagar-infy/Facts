@@ -1,7 +1,7 @@
 package presenter;
 
 /**
- * Created by Anubha on 12/04/18.
+ * Interface that defines list item click
  */
 public interface RecyclerItemClickListener {
     void onItemClickListener(int position);

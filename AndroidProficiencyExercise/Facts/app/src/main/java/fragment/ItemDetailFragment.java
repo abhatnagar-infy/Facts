@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import model.Item;
 
 /**
- * Created by Anubha on 12/04/18.
+ * Fragment that shows the details of recycler view items
  */
 
 public class ItemDetailFragment extends android.support.v4.app.DialogFragment {
@@ -48,7 +48,9 @@ public class ItemDetailFragment extends android.support.v4.app.DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog mDialog = super.onCreateDialog(savedInstanceState);
-        mDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        if(null != mDialog && null != mDialog.getWindow()) {
+            mDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
         return mDialog;
     }
 

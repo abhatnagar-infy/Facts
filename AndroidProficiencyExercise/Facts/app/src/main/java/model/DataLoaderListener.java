@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Interfaces that manages paging of the list
  */
 public interface DataLoaderListener {
     void onInitialItemsLoaded(ItemList itemList);

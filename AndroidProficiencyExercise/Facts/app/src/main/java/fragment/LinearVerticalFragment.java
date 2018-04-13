@@ -10,7 +10,7 @@ import androidproficiency.com.facts.R;
 import model.Item;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Fragment that displays the list
  */
 public class LinearVerticalFragment extends BaseFragment {
 

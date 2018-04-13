@@ -24,7 +24,7 @@ import model.Item;
 import presenter.RecyclerItemClickListener;
 
 /**
- * Created by Anubha on 12/04/18.
+ * Adapter class that binds data to the recycler view
  */
 public class AdapterExample extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -65,6 +65,8 @@ public class AdapterExample extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 break;
             case LOADING:
                 viewHolder = getProgressViewHolder(parent, inflater);
+                break;
+            default:
                 break;
         }
         return viewHolder;

@@ -18,9 +18,9 @@ import java.util.List;
 
 import adapter.AdapterExample;
 import androidproficiency.com.facts.R;
-import androidproficiency.com.facts.activity.MainActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import interfaces.ISetTitle;
 import model.Item;
 import model.ItemInteractor;
 import presenter.ItemPresenter;
@@ -30,7 +30,7 @@ import view.ItemView;
 import widget.ItemOffsetDecoration;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Base Fragment that provides common methods
  */
 public abstract class BaseFragment extends Fragment implements ItemView, RecyclerItemClickListener,
         SwipeRefreshLayout.OnRefreshListener{
@@ -45,13 +45,14 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
     @Bind(R.id.swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    RecyclerView.Adapter adapter;
+    private RecyclerView.Adapter adapter;
     private ItemPresenter itemPresenter;
     private LinearLayoutManager layoutManager;
     private boolean isLoading;
     private int currentPage = PAGE_START;
     private boolean isLastPage;
     private ItemInteractionCallback itemInteractionCallback;
+    private ISetTitle iSetTitle;
 
     @Nullable
     @Override
@@ -76,18 +77,14 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
             itemInteractionCallback = (ItemInteractionCallback) context;
+            iSetTitle = (ISetTitle) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement ItemInteractionCallback");
+                    + " must implement ItemInteractionCallback and ISetTitle");
         }
     }
 
@@ -95,6 +92,7 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
     public void onDetach() {
         super.onDetach();
         itemInteractionCallback = null;
+        iSetTitle = null;
     }
 
     @Override
@@ -139,7 +137,7 @@ public abstract class BaseFragment extends Fragment implements ItemView, Recycle
     }
     @Override
     public void setTitle(String title) {
-        ((MainActivity) getActivity()).setToolBarTitle(title);
+        iSetTitle.setTitle(title);
     }
 
     @Override

@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Created by Anubha on 12/04/18.
+ * Class that defines list decoration
  */
 public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
 
-    private int mItemOffset;
+    private final int mItemOffset;
 
     public ItemOffsetDecoration(int itemOffset) {
         mItemOffset = itemOffset;

@@ -1,7 +1,7 @@
 package presenter;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Interface that acts as presenter
  */
 public interface Presenter <V> {
 

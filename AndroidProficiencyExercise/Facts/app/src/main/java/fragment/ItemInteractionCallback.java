@@ -4,7 +4,7 @@ package fragment;
 import model.Item;
 
 /**
- * Created by Anubha.
+ * Interface that listens item click
  */
 
 public interface ItemInteractionCallback {

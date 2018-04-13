@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Interactor class for item data
  */
 
 public class ItemInteractor implements DataInteractor {

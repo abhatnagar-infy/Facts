@@ -4,7 +4,7 @@ import java.util.List;
 import model.Item;
 
 /**
- * Created by Anubha on 11/04/18.
+ * Interface that provides methods for setting up list data
  */
 public interface ItemView {
 
