@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Facts</string>
+    <string name="network_error">Some error occurred,\nclick here to try again</string>
+</resources>
