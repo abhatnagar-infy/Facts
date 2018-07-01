@@ -92,10 +92,12 @@ public class ItemPresenter implements Presenter<ItemView>, DataLoaderListener {
 
     @Override
     public void onInitialItemsLoaded(ItemList itemList) {
-        itemView.setTitle(itemList.getTitle());
-        itemView.setItems(itemList.getItemList());
-        itemView.hideProgress();
-        itemView.resetRefreshingLayout();
+        if (itemView != null ) {
+            itemView.setTitle(itemList.getTitle());
+            itemView.setItems(itemList.getItemList());
+            itemView.hideProgress();
+            itemView.resetRefreshingLayout();
+        }
     }
 
     @Override
